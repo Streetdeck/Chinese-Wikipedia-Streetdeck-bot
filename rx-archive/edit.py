@@ -1,24 +1,16 @@
-# -*- coding: utf-8 -*-
+from datetime import datetime
+from config import config_page_name
 import json
 import os
 import re
 import time
-from datetime import datetime
-
 import mwparserfromhell
-os.environ['PYWIKIBOT_DIR'] = os.path.dirname(os.path.realpath(__file__))
 import pywikibot
-from config import config_page_name  # pylint: disable=E0611,W0614
 
-os.environ['TZ'] = 'UTC'
+os.environ['PYWIKIBOT_DIR'] = os.path.dirname(os.path.realpath(__file__))
 
 site = pywikibot.Site()
 site.login()
-
-config_page = pywikibot.Page(site, config_page_name)
-cfg = config_page.text
-cfg = json.loads(cfg)
-print(json.dumps(cfg, indent=4, ensure_ascii=False))
 
 config_page = pywikibot.Page(site, config_page_name)
 cfg = config_page.text
@@ -56,8 +48,8 @@ count = 0
     for m in re.findall(r"(\d{4})年(\d{1,2})月(\d{1,2})日 \(.\) (\d{2}):(\d{2}) \(UTC\)", str(section)):
         d = datetime(int(m[0]), int(m[1]), int(m[2]), int(m[3]), int(m[4]))
         lasttime = max(lasttime, d)
-    print(lasttime, end="\t")
-    
+    print(lasttime, end="\t"
+          
       processed = False
     if re.search(cfg["processed_regex"], str(section)) and not re.search(cfg["not_processed_regex"], str(section)):
         processed = True
@@ -89,7 +81,7 @@ count = 0
         section.remove(section)
         print("archive to " + str(target), end="\t")
     print()
-
+    
 pywikibot.showDiff(rxpage.text, text)
 rxpage.text = text
 summary = cfg["main_page_summary"].format(count)
