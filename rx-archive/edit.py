@@ -34,28 +34,28 @@ count = 0
                 status = template.get(1)
             else:
                 status = "(empty)"
-            print("status", status, end="\t")
+            print("status", status, end="\n")
             if status in cfg["publicizing_status"]:
                 publicizing = True
-                print("publicizing", end="\t")
+                print("publicizing", end="\n")
                 break
             elif status in cfg["done_status"]:
                 processed = True
-                print("procesed", end="\t")
+                print("procesed", end="\n")
                 break
                 
                  lasttime = datetime(1, 1, 1)
     for m in re.findall(r"(\d{4})年(\d{1,2})月(\d{1,2})日 \(.\) (\d{2}):(\d{2}) \(UTC\)", str(section)):
         d = datetime(int(m[0]), int(m[1]), int(m[2]), int(m[3]), int(m[4]))
         lasttime = max(lasttime, d)
-    print(lasttime, end="\t"
+    print(lasttime, end="\n)"
           
       processed = False
     if re.search(cfg["processed_regex"], str(section)) and not re.search(cfg["not_processed_regex"], str(section)):
         processed = True
-        print("processed", end="\t")
+        print("processed", end="\n")
     else:
-        print("not processed", end="\t")
+        print("not processed", end="\n")
 
     if (
         (
@@ -79,7 +79,7 @@ count = 0
         archivelist[target].append(archivestr)
         count += 1
         section.remove(section)
-        print("archive to " + str(target), end="\t")
+        print("archive to " + str(target), end="\n")
     print()
     
 pywikibot.showDiff(rxpage.text, text)
