@@ -3,7 +3,7 @@ from datetime import datetime
 try:
     from config import config_page_name
 except ModuleNotFoundError:
-    raise ModuleNotFoundError("Please copy config.sample.py as config.py, setting up, and try again.")
+    raise ModuleNotFoundError("config.py")
 
 import json
 import os
